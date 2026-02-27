@@ -1,0 +1,610 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.attempt {
+    flex: 1;
+    @include flex-column;
+    overflow: hidden;
+    height: calc(100vh - 65px);
+
+    // ─── Top Bar ────────────────────────────────────────────
+    &__topbar {
+        @include flex-between;
+        padding: $space-sm $space-base;
+        background: $color-bg-secondary;
+        border-bottom: 1px solid $color-border;
+        flex-shrink: 0;
+        gap: $space-sm;
+
+        @include tablet {
+            padding: $space-md $space-lg;
+        }
+    }
+
+    &__back {
+        @include btn-reset;
+        @include flex-center;
+        gap: $space-xs;
+        color: $color-text-secondary;
+        font-size: $font-size-sm;
+        padding: $space-xs $space-sm;
+        border-radius: $radius-md;
+        transition: all $transition-fast;
+
+        &:hover {
+            color: $color-accent;
+            background: $color-accent-glow;
+        }
+    }
+
+    &__topbar-title {
+        font-size: $font-size-base;
+        font-weight: $font-weight-semibold;
+        color: $color-text-primary;
+        @include truncate;
+        flex: 1;
+        text-align: center;
+
+        @include tablet {
+            font-size: $font-size-md;
+        }
+    }
+
+    // ─── Main Content ───────────────────────────────────────
+    &__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        @include desktop {
+            flex-direction: row;
+        }
+    }
+
+    // ─── Left Panel (Question + Schema) ─────────────────────
+    &__left {
+        @include flex-column;
+        border-bottom: 1px solid $color-border;
+        min-height: 200px;
+        max-height: 40vh;
+        overflow: hidden;
+
+        @include desktop {
+            width: 40%;
+            max-width: 500px;
+            max-height: none;
+            border-bottom: none;
+            border-right: 1px solid $color-border;
+        }
+
+        @include wide {
+            width: 35%;
+            max-width: 550px;
+        }
+    }
+
+    &__left-tabs {
+        display: flex;
+        background: $color-bg-secondary;
+        border-bottom: 1px solid $color-border;
+        flex-shrink: 0;
+    }
+
+    &__left-tab {
+        @include btn-reset;
+        flex: 1;
+        padding: $space-md;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-muted;
+        border-bottom: 2px solid transparent;
+        transition: all $transition-fast;
+
+        &:hover {
+            color: $color-text-secondary;
+        }
+
+        &--active {
+            color: $color-accent;
+            border-bottom-color: $color-accent;
+        }
+    }
+
+    &__left-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: $space-base;
+        @include custom-scrollbar;
+
+        @include tablet {
+            padding: $space-lg;
+        }
+    }
+
+    // ─── Right Panel (Editor + Results) ─────────────────────
+    &__right {
+        flex: 1;
+        @include flex-column;
+        overflow: hidden;
+        min-height: 0;
+    }
+
+    // ─── Editor Area ────────────────────────────────────────
+    &__editor-area {
+        @include flex-column;
+        flex: 1;
+        min-height: 200px;
+        overflow: hidden;
+
+        @include desktop {
+            flex: 1;
+        }
+    }
+
+    &__editor-toolbar {
+        @include flex-between;
+        padding: $space-sm $space-base;
+        background: $color-bg-secondary;
+        border-bottom: 1px solid $color-border;
+        flex-shrink: 0;
+        flex-wrap: wrap;
+        gap: $space-sm;
+    }
+
+    &__editor-label {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+        @include flex-center;
+        gap: $space-xs;
+    }
+
+    &__editor-actions {
+        @include flex-center;
+        gap: $space-sm;
+    }
+
+    &__editor-wrapper {
+        flex: 1;
+        min-height: 0;
+    }
+
+    // ─── Buttons ────────────────────────────────────────────
+    &__btn {
+        @include btn-reset;
+        @include flex-center;
+        gap: $space-xs;
+        padding: $space-sm $space-base;
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        transition: all $transition-base;
+
+        &--run {
+            background: $color-success;
+            color: #0a0e17;
+
+            &:hover {
+                filter: brightness(1.1);
+                box-shadow: 0 0 16px rgba($color-success, 0.35);
+            }
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
+
+        &--hint {
+            background: transparent;
+            color: $color-accent;
+            border: 1px solid $color-accent;
+
+            &:hover {
+                background: $color-accent-glow;
+            }
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    // ─── Results Area ───────────────────────────────────────
+    &__results-area {
+        @include flex-column;
+        max-height: 40vh;
+        border-top: 1px solid $color-border;
+        flex-shrink: 0;
+
+        @include desktop {
+            max-height: 45vh;
+        }
+    }
+
+    &__results-header {
+        @include flex-between;
+        padding: $space-sm $space-base;
+        background: $color-bg-secondary;
+        border-bottom: 1px solid $color-border;
+        flex-shrink: 0;
+    }
+
+    &__results-label {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+    }
+
+    &__results-meta {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+    }
+
+    &__results-body {
+        flex: 1;
+        overflow: auto;
+        @include custom-scrollbar;
+        min-height: 100px;
+    }
+}
+
+// ─── Question Panel ─────────────────────────────────────────
+.question-panel {
+    &__text {
+        color: $color-text-primary;
+        font-size: $font-size-base;
+        line-height: 1.8;
+        margin-bottom: $space-lg;
+    }
+
+    &__hint-label {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        color: $color-accent;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: $space-sm;
+    }
+
+    &__hint-text {
+        font-size: $font-size-sm;
+        color: $color-text-muted;
+        background: $color-bg-elevated;
+        padding: $space-md;
+        border-radius: $radius-md;
+        border-left: 3px solid $color-accent;
+        line-height: 1.6;
+    }
+}
+
+// ─── Schema Viewer ──────────────────────────────────────────
+.schema-viewer {
+    &__table {
+        margin-bottom: $space-lg;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__table-name {
+        font-family: $font-mono;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        color: $color-accent;
+        padding: $space-sm $space-md;
+        background: $color-bg-elevated;
+        border-radius: $radius-md $radius-md 0 0;
+        border: 1px solid $color-border;
+        border-bottom: none;
+    }
+
+    &__columns {
+        border: 1px solid $color-border;
+        border-radius: 0 0 $radius-md $radius-md;
+        overflow: hidden;
+    }
+
+    &__col-row {
+        @include flex-between;
+        padding: $space-sm $space-md;
+        font-size: $font-size-sm;
+        border-bottom: 1px solid $color-border;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:nth-child(even) {
+            background: rgba($color-bg-elevated, 0.5);
+        }
+    }
+
+    &__col-name {
+        font-family: $font-mono;
+        color: $color-text-primary;
+    }
+
+    &__col-type {
+        font-family: $font-mono;
+        color: $color-text-muted;
+        font-size: $font-size-xs;
+    }
+
+    &__sample-label {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: $space-sm $space-md;
+        border: 1px solid $color-border;
+        border-top: none;
+        background: $color-bg-secondary;
+    }
+
+    &__sample-data {
+        overflow-x: auto;
+        @include custom-scrollbar;
+        border: 1px solid $color-border;
+        border-top: none;
+        border-radius: 0 0 $radius-md $radius-md;
+    }
+
+    &__sample-table {
+        width: 100%;
+        font-size: $font-size-xs;
+        font-family: $font-mono;
+
+        th {
+            padding: $space-sm;
+            text-align: left;
+            color: $color-text-muted;
+            background: $color-bg-secondary;
+            font-weight: $font-weight-medium;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: $space-sm;
+            color: $color-text-secondary;
+            white-space: nowrap;
+            border-top: 1px solid $color-border;
+        }
+    }
+}
+
+// ─── Results Table ──────────────────────────────────────────
+.results-table {
+    width: 100%;
+    font-size: $font-size-sm;
+
+    th {
+        padding: $space-sm $space-md;
+        text-align: left;
+        color: $color-accent-light;
+        background: $color-bg-secondary;
+        font-weight: $font-weight-semibold;
+        font-family: $font-mono;
+        font-size: $font-size-xs;
+        text-transform: uppercase;
+        white-space: nowrap;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    td {
+        padding: $space-sm $space-md;
+        color: $color-text-secondary;
+        border-top: 1px solid $color-border;
+        font-family: $font-mono;
+        font-size: $font-size-xs;
+        white-space: nowrap;
+    }
+
+    tr:hover td {
+        background: rgba($color-accent, 0.04);
+    }
+}
+
+.results-empty {
+    @include flex-center;
+    flex-direction: column;
+    gap: $space-sm;
+    padding: $space-xl;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+
+    &__icon {
+        font-size: $font-size-2xl;
+        opacity: 0.5;
+    }
+}
+
+.results-error {
+    padding: $space-base;
+    margin: $space-base;
+    background: $color-error-bg;
+    border: 1px solid rgba($color-error, 0.3);
+    border-radius: $radius-md;
+    color: $color-error;
+    font-family: $font-mono;
+    font-size: $font-size-sm;
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+// ─── Hint Panel ─────────────────────────────────────────────
+.hint-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: $z-modal;
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+        width: 400px;
+    }
+
+    @include desktop {
+        width: 420px;
+    }
+
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        animation: fadeIn 0.2s ease;
+    }
+
+    &__content {
+        flex: 1;
+        @include flex-column;
+        background: $color-bg-secondary;
+        border-left: 1px solid $color-border;
+        animation: slideInRight 0.3s ease;
+        overflow: hidden;
+    }
+
+    &__header {
+        @include flex-between;
+        padding: $space-base $space-lg;
+        border-bottom: 1px solid $color-border;
+        flex-shrink: 0;
+    }
+
+    &__title {
+        font-size: $font-size-md;
+        font-weight: $font-weight-semibold;
+        color: $color-accent;
+    }
+
+    &__close {
+        @include btn-reset;
+        color: $color-text-muted;
+        font-size: $font-size-xl;
+        padding: $space-xs;
+
+        &:hover {
+            color: $color-text-primary;
+        }
+    }
+
+    &__body {
+        flex: 1;
+        overflow-y: auto;
+        padding: $space-lg;
+        @include custom-scrollbar;
+    }
+
+    &__message {
+        background: $color-bg-elevated;
+        border-radius: $radius-lg;
+        padding: $space-base $space-lg;
+        margin-bottom: $space-base;
+        color: $color-text-secondary;
+        font-size: $font-size-sm;
+        line-height: 1.8;
+        border: 1px solid $color-border;
+        white-space: pre-wrap;
+
+        &--user {
+            background: rgba($color-accent, 0.1);
+            border-color: rgba($color-accent, 0.2);
+            color: $color-text-primary;
+            margin-left: $space-lg;
+        }
+    }
+
+    &__loading {
+        @include flex-center;
+        gap: $space-sm;
+        padding: $space-lg;
+        color: $color-text-muted;
+        font-size: $font-size-sm;
+    }
+
+    &__footer {
+        padding: $space-base;
+        border-top: 1px solid $color-border;
+        flex-shrink: 0;
+    }
+
+    &__ask-btn {
+        @include btn-reset;
+        width: 100%;
+        padding: $space-md;
+        background: $color-accent;
+        color: white;
+        border-radius: $radius-md;
+        font-weight: $font-weight-medium;
+        transition: all $transition-base;
+
+        &:hover {
+            background: $color-accent-light;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+// ─── Mobile Tab Navigation ──────────────────────────────────
+.attempt__mobile-tabs {
+    display: flex;
+    background: $color-bg-secondary;
+    border-top: 1px solid $color-border;
+
+    @include desktop {
+        display: none;
+    }
+}
+
+.attempt__mobile-tab {
+    @include btn-reset;
+    flex: 1;
+    padding: $space-md;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    text-align: center;
+    border-top: 2px solid transparent;
+    transition: all $transition-fast;
+
+    &--active {
+        color: $color-accent;
+        border-top-color: $color-accent;
+        background: rgba($color-accent, 0.05);
+    }
+}

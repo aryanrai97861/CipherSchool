@@ -1,0 +1,37 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+body {
+    font-family: $font-family;
+    font-size: $font-size-base;
+    color: $color-text-primary;
+    background: $color-bg-primary;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#root {
+    min-height: 100vh;
+    @include flex-column;
+}
+
+// ─── Global utilities ───────────────────────────────────────
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 $space-base;
+
+    @include tablet {
+        padding: 0 $space-lg;
+    }
+
+    @include wide {
+        padding: 0 $space-xl;
+    }
+}
+
+::selection {
+    background: $color-accent;
+    color: white;
+}

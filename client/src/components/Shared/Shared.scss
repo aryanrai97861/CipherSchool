@@ -1,0 +1,55 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.loader {
+    @include flex-center;
+    padding: $space-2xl;
+    flex-direction: column;
+    gap: $space-base;
+
+    &__spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid $color-border;
+        border-top-color: $color-accent;
+        border-radius: $radius-full;
+        animation: spin 0.8s linear infinite;
+    }
+
+    &__text {
+        color: $color-text-muted;
+        font-size: $font-size-sm;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.difficulty-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: $space-xs $space-sm;
+    border-radius: $radius-full;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &--easy {
+        background: $color-success-bg;
+        color: $color-easy;
+    }
+
+    &--medium {
+        background: $color-warning-bg;
+        color: $color-medium;
+    }
+
+    &--hard {
+        background: $color-error-bg;
+        color: $color-hard;
+    }
+}

@@ -1,0 +1,110 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: $z-navbar;
+    @include glass(0.85);
+    border-bottom: 1px solid $color-border;
+    padding: $space-md $space-base;
+
+    @include tablet {
+        padding: $space-md $space-lg;
+    }
+
+    &__inner {
+        @include flex-between;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    &__brand {
+        @include flex-center;
+        gap: $space-sm;
+
+        &-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, $color-accent, $color-accent-light);
+            border-radius: $radius-md;
+            @include flex-center;
+            font-size: $font-size-lg;
+            color: white;
+            font-weight: $font-weight-bold;
+        }
+
+        &-text {
+            font-size: $font-size-lg;
+            font-weight: $font-weight-bold;
+            color: $color-text-primary;
+
+            span {
+                color: $color-accent;
+            }
+
+            @include mobile-only {
+                font-size: $font-size-md;
+            }
+        }
+    }
+
+    &__actions {
+        @include flex-center;
+        gap: $space-md;
+    }
+
+    &__user {
+        @include flex-center;
+        gap: $space-sm;
+        color: $color-text-secondary;
+        font-size: $font-size-sm;
+
+        &-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: $radius-full;
+            background: linear-gradient(135deg, $color-accent, $color-accent-light);
+            @include flex-center;
+            color: white;
+            font-size: $font-size-sm;
+            font-weight: $font-weight-semibold;
+        }
+    }
+
+    &__btn {
+        @include btn-reset;
+        padding: $space-sm $space-base;
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        transition: all $transition-base;
+
+        &--login {
+            color: $color-text-secondary;
+
+            &:hover {
+                color: $color-text-primary;
+            }
+        }
+
+        &--signup {
+            background: $color-accent;
+            color: white;
+
+            &:hover {
+                background: $color-accent-light;
+                box-shadow: $shadow-glow;
+            }
+        }
+
+        &--logout {
+            color: $color-text-muted;
+            font-size: $font-size-xs;
+
+            &:hover {
+                color: $color-error;
+            }
+        }
+    }
+}

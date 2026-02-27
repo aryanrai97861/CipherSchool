@@ -1,0 +1,134 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.auth {
+    @include flex-center;
+    min-height: calc(100vh - 65px);
+    padding: $space-base;
+
+    &__card {
+        @include glass(0.5);
+        border-radius: $radius-xl;
+        padding: $space-xl;
+        width: 100%;
+        max-width: 420px;
+        animation: fadeUp 0.4s ease;
+
+        @include tablet {
+            padding: $space-2xl;
+        }
+    }
+
+    &__title {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-bold;
+        color: $color-text-primary;
+        text-align: center;
+        margin-bottom: $space-xs;
+    }
+
+    &__subtitle {
+        font-size: $font-size-sm;
+        color: $color-text-muted;
+        text-align: center;
+        margin-bottom: $space-xl;
+    }
+
+    &__form {
+        @include flex-column;
+        gap: $space-base;
+    }
+
+    &__field {
+        @include flex-column;
+        gap: $space-xs;
+    }
+
+    &__label {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+    }
+
+    &__input {
+        width: 100%;
+        padding: $space-md;
+        background: $color-bg-input;
+        border: 1px solid $color-border;
+        border-radius: $radius-md;
+        color: $color-text-primary;
+        font-size: $font-size-base;
+        transition: border-color $transition-fast;
+        outline: none;
+
+        &:focus {
+            border-color: $color-accent;
+            box-shadow: 0 0 0 3px $color-accent-glow;
+        }
+
+        &::placeholder {
+            color: $color-text-muted;
+        }
+    }
+
+    &__submit {
+        @include btn-reset;
+        width: 100%;
+        padding: $space-md;
+        background: linear-gradient(135deg, $color-accent, $color-accent-light);
+        color: white;
+        border-radius: $radius-md;
+        font-size: $font-size-md;
+        font-weight: $font-weight-semibold;
+        margin-top: $space-sm;
+        transition: all $transition-base;
+
+        &:hover {
+            box-shadow: $shadow-glow;
+            transform: translateY(-1px);
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+    }
+
+    &__error {
+        background: $color-error-bg;
+        color: $color-error;
+        padding: $space-md;
+        border-radius: $radius-md;
+        font-size: $font-size-sm;
+        text-align: center;
+    }
+
+    &__footer {
+        text-align: center;
+        margin-top: $space-lg;
+        font-size: $font-size-sm;
+        color: $color-text-muted;
+
+        a {
+            color: $color-accent;
+            font-weight: $font-weight-medium;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
